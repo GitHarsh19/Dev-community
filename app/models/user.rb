@@ -28,6 +28,9 @@ class User < ApplicationRecord
     'Technical Support Engineer',
     'UI Engineer'
   ].freeze
+  def address
+    "#{city}, #{state}, #{country}, #{pincode}"
+  end
   def name
     "#{first_name} #{last_name}".strip
   end

@@ -22,7 +22,7 @@ ActiveRecord::Base.transaction do
 			date_of_birth: (Date.today + rand(1..30).days) - rand(24..36).years,
 			profile_title: User::PROFILE_TITLE.sample,
 			password: 'password',
-			about: Faker::Lorem.paragraphs
+			about: Faker::Lorem.sentence(word_count: 70)
 		)
 		puts "User #{i+1} created succesfully"
 	end
