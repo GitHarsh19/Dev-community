@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
   root "home#index"
 
   get 'member/:id' , to: 'members#show', as: 'member'
   get 'edit_description/:id', to: 'members#edit_description', as: 'edit_member_description'
+  patch 'update_description/:id', to: 'members#update_description', as: 'update_member_description'
 
 end
