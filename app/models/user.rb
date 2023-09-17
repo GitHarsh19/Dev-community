@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   
 
-  has_many :work_experiences
+  has_many :work_experiences, dependent: :destroy
+  has_many :connections, dependent: :destroy
 
   PROFILE_TITLE = [
     'Senior Ruby On Rails Developer',
@@ -43,5 +44,8 @@ class User < ApplicationRecord
   end
   def self.ransackable_associations(auth_object = nil)
     []
+  end
+  def check_if_already_connected?(current_user, user)
+    current_user != user && !current_user.connections.pluck(:connected_user_id).include?(user.id)
   end
 end
