@@ -13,5 +13,6 @@ Rails.application.routes.draw do
 
   resources :work_experiences
   resources :connections
+  get 'member-connections/:id', to: 'members#connections', as: 'member_connections'
 
 end

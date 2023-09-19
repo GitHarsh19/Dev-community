@@ -21,8 +21,14 @@ class MembersController < ApplicationController
 				format.turbo_stream { render turbo_stream: turbo_stream.replace('member-personal-details', partial: 'members/member_personal_details', locals: { user: current_user })}
 			end
 		end
-	
 	end
+	
+	def connections
+		@requested_connections = Connection.includes(:requested).where(user_id: params[:id], status: 'accepted')
+		@received_connections = Connection.includes(:received).where(connected_user_id: params[:id], status: 'accepted')
+		@total_connections = @requested_connections.count + @received_connections.count
+	end
+
 	private
 	def user_personal_info_params
 		params.require(:user).permit(:first_name, :last_name,:city,:state,:country,:pincode,:profile_title)
